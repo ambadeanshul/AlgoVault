@@ -1,31 +1,25 @@
-import mongoose from "mongoose"
-import {Comment} from "../models/comment.model.js"
-import {ApiError} from "../utils/ApiError.js"
-import {ApiResponse} from "../utils/ApiResponse.js"
-import {asyncHandler} from "../utils/asyncHandler.js"
-
-const getVideoComments = asyncHandler(async (req, res) => {
-    //TODO: get all comments for a video
-    const {videoId} = req.params
-    const {page = 1, limit = 10} = req.query
-
-})
+import { Comment } from "../models/comment.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const addComment = asyncHandler(async (req, res) => {
-    // TODO: add a comment to a video
-})
+    const { problemId } = req.params;
+    const { content } = req.body;
 
-const updateComment = asyncHandler(async (req, res) => {
-    // TODO: update a comment
-})
-
-const deleteComment = asyncHandler(async (req, res) => {
-    // TODO: delete a comment
-})
-
-export {
-    getVideoComments, 
-    addComment, 
-    updateComment,
-     deleteComment
+    if (!content) {
+        throw new ApiError(400, "Content is required");
     }
+
+    const comment = await Comment.create({ 
+        content, 
+        problem: problemId, 
+        owner: req.user._id 
+    });
+
+    return res.status(201).json(
+        new ApiResponse(201, comment, "Logic review comment added successfully")
+    );
+});
+
+export { addComment };

@@ -1,26 +1,24 @@
 import mongoose, {Schema} from "mongoose";
 
-const playlistSchema = new Schema({
+const patternSchema = new Schema({
     name: {
-        type: String,
+        type: String, // e.g., "Dynamic Programming", "Sliding Window"
         required: true
     },
     description: {
         type: String,
         required: true
     },
-    videos: [
+    problems: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Video"
+            ref: "Problem" // Links to your problems instead of videos
         }
     ],
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    },
+    }
 }, {timestamps: true})
 
-
-
-export const Playlist = mongoose.model("Playlist", playlistSchema)
+export const Pattern = mongoose.model("Pattern", patternSchema)
