@@ -33,7 +33,7 @@ This repository contains the backend only. It exposes JSON APIs that can be cons
 
 ```bash
 git clone <your-repository-url>
-cd chai-backend
+cd algovault
 npm install
 ```
 
