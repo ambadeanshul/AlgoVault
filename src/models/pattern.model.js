@@ -12,7 +12,7 @@ const patternSchema = new Schema({
     problems: [
         {
             type: Schema.Types.ObjectId,
-            ref: "Problem" // Links to your problems instead of videos
+            ref: "Problem" // Links to your problems 
         }
     ],
     owner: {
